@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	quicconn "github.com/marten-seemann/quic-conn"
+	quicconn "github.com/vikulin/quic-conn"
 )
 
 func main() {

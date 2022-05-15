@@ -1,4 +1,4 @@
-module github.com/marten-seemann/quic-conn
+module github.com/vikulin/quic-conn
 
 go 1.17
 
