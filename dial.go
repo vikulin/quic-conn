@@ -1,6 +1,7 @@
 package quicconn
 
 import (
+	"context"
 	"crypto/tls"
 	"net"
 
@@ -34,6 +35,25 @@ func Listen(network, laddr string, tlsConfig *tls.Config) (net.Listener, error) 
 func Dial(addr string, tlsConfig *tls.Config) (net.Conn, error) {
 	// DialAddr returns once a forward-secure connection is established
 	qConn, err := quic.DialAddr(addr, tlsConfig, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	sendStream, err := qConn.OpenStream()
+	if err != nil {
+		return nil, err
+	}
+
+	return &conn{
+		quicConn:   qConn,
+		sendStream: sendStream,
+	}, nil
+}
+
+// DialAddrContext establishes a new QUIC connection to a server using the provided context.
+// See DialAddr for details.
+func DialContext(ctx context.Context, addr string, tlsConfig *tls.Config) (net.Conn, error) {
+	qConn, err := quic.DialAddrContext(ctx, addr, tlsConfig, nil)
 	if err != nil {
 		return nil, err
 	}
