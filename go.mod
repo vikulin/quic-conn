@@ -8,7 +8,7 @@ require (
 	github.com/onsi/gomega v1.13.0
 )
 
-replace github.com/lucas-clemente/quic-go => github.com/vikulin/quic-go 16e707f
+replace github.com/lucas-clemente/quic-go => github.com/vikulin/quic-go a43838e5e6a0621ac0c383b94060b9316866dd84
 
 require (
 	github.com/alangpierce/go-forceexport v0.0.0-20160317203124-8f1d6941cd75 // indirect
