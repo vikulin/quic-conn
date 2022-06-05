@@ -61,13 +61,7 @@ func (c *conn) RemoteAddr() net.Addr {
 }
 
 func (c *conn) Close() error {
-	if c.receiveStream != nil {
-		return c.receiveStream.Close()
-	}
-	if c.receiveStream != nil {
-		return c.sendStream.Close()
-	}
-	return nil
+	return c.quicConn.CloseWithError(0, "bye")
 }
 
 func (c *conn) SetDeadline(t time.Time) error {
