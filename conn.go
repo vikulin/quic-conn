@@ -5,7 +5,7 @@ import (
 	"net"
 	"time"
 
-	quic "github.com/lucas-clemente/quic-go"
+	quic "github.com/quic-go/quic-go"
 )
 
 type conn struct {
@@ -16,13 +16,13 @@ type conn struct {
 }
 
 func newConn(qConn quic.Connection) (*conn, error) {
-	
+
 	stream, err := qConn.OpenStream()
 	if err != nil {
 		return nil, err
 	}
 	return &conn{
-		quicConn:    qConn,
+		quicConn:   qConn,
 		sendStream: stream,
 	}, nil
 }

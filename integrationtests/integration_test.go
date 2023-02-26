@@ -12,9 +12,9 @@ import (
 	"net"
 	"time"
 
-	quicconn "github.com/marten-seemann/quic-conn"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	quicconn "github.com/vikulin/quic-conn"
 )
 
 const alpn = "quic-conn"

@@ -1,10 +1,10 @@
 {
   "author": "marten-seemann",
   "bugs": {
-    "url": "github.com/marten-seemann/quic-conn"
+    "url": "github.com/vikulin/quic-conn"
   },
   "gx": {
-    "dvcsimport": "github.com/marten-seemann/quic-conn"
+    "dvcsimport": "github.com/vikulin/quic-conn"
   },
   "gxVersion": "0.11.0",
   "language": "go",

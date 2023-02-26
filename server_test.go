@@ -8,9 +8,9 @@ import (
 	"net"
 	"time"
 
-	quic "github.com/lucas-clemente/quic-go"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	quic "github.com/quic-go/quic-go"
 )
 
 type mockPacketConn struct {
@@ -67,8 +67,8 @@ func (m *mockStream) Context() context.Context         { panic("not implemented"
 func (m *mockStream) SetReadDeadline(time.Time) error  { panic("not implemented") }
 func (m *mockStream) SetWriteDeadline(time.Time) error { panic("not implemented") }
 func (m *mockStream) SetDeadline(time.Time) error      { panic("not implemented") }
-func (m *mockStream) CancelRead(quic.ErrorCode)        { panic("not implemented") }
-func (m *mockStream) CancelWrite(quic.ErrorCode)       { panic("not implemented") }
+func (m *mockStream) CancelRead(quic.StreamErrorCode)  { panic("not implemented") }
+func (m *mockStream) CancelWrite(quic.StreamErrorCode) { panic("not implemented") }
 
 type mockQuicListener struct {
 	blockAccept  chan struct{} // close this to make accept return
@@ -84,9 +84,9 @@ func newMockQuicListener() *mockQuicListener {
 	}
 }
 
-func (l *mockQuicListener) Accept(context.Context) (quic.Session, error) {
+func (l *mockQuicListener) Accept(context.Context) (quic.Stream, error) {
 	<-l.blockAccept
-	return l.sessToAccept, l.acceptErr
+	return &l.sessToAccept.streamToAccept, l.acceptErr
 }
 func (l *mockQuicListener) Addr() net.Addr { return l.addr }
 func (l *mockQuicListener) Close() error   { return l.closeErr }
